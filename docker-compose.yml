@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  vxBot:
+    image: 'node:latest'
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    working_dir: /app
+    command: 
+      - bash
+      - -c
+      - npm i && node main.js
+    
+  
