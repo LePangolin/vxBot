@@ -10,13 +10,13 @@ const CLIENT = new DISCORD.Client({
 
 CLIENT.on('messageCreate', (message) => {
     if(!message.author.bot){
-        if(message.content.includes("x.com") || message.content.includes("twitter.com")){
+        if(message.content.includes("https://x.com") || message.content.includes("https://twitter.com")){
             let content = message.content.split(" ");
             let orignalMessage = '';
             let indexLink = 0;
             let find = false;
             content.forEach((element) => {
-                if(!element.includes("x.com") && !element.includes("twitter.com")){
+                if(!element.includes("https://x.com") && !element.includes("https://twitter.com")){
                     if(!find){
                         indexLink++;
                     }
@@ -47,9 +47,11 @@ CLIENT.on('messageCreate', (message) => {
                     link+='/';
                 }
             });
-            message.delete();
-            message.channel.send(message.author.toString() + " : " + orignalMessage);
-            message.channel.send(link);
+            if(secondPart.length > 2){
+                message.delete();
+                message.channel.send(message.author.toString() + " : " + orignalMessage);
+                message.channel.send(link);
+            }
         }
     }
 });
